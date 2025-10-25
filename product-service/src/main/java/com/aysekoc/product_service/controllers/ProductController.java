@@ -10,6 +10,7 @@ public class ProductController {
 
     @GetMapping
     public String get(){
+        System.out.println("Processing...");
         return "Product Service";
     }
 }
