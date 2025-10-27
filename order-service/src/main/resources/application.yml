@@ -3,6 +3,7 @@ spring:
     name: "order-service"
   cloud:
     stream:
+      defaultBinder: kafka
       function:
         definition: orderCreatedFunction
       bindings:
@@ -12,8 +13,6 @@ spring:
       kafka:
         binder:
           brokers: localhost:9092
-
-
 server:
   port: 8081
 
