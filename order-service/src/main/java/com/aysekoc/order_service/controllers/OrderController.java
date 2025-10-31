@@ -2,12 +2,15 @@ package com.aysekoc.order_service.controllers;
 
 import com.aysekoc.order_service.client.ProductClient;
 import com.aysekoc.order_service.entity.Order;
+import io.github.aysekocc.event.order.OrderCreatedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cloud.stream.function.StreamBridge;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/api/v1/order")
@@ -24,13 +27,10 @@ public class OrderController {
 
         //kafkaya mesaj gönder
 
-        // TODO: Kafkadan common bir classı gönder.
-        Order order = new Order();
-        order.setId("abc123");
-        //
+        OrderCreatedEvent orderCreatedEvent = new OrderCreatedEvent("abc123", LocalDate.now());
 
 
-        streamBridge.send("orderCreatedFunction-out-0","Mesaj123");
+        streamBridge.send("orderCreatedFunction-out-0",orderCreatedEvent);
         return "Order Service";
     }
 }
