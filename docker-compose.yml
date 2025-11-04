@@ -45,6 +45,8 @@ services:
     image: turkcell-order-service
     ports:
       - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://pg-1:5432/order-service"
 
 volumes:
   pg1_data:
