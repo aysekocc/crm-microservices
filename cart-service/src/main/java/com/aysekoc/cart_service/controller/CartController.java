@@ -20,7 +20,7 @@ public class CartController {
         return this.cartRepository.findByCustomerFullName(name).orElseThrow();
     }
 
-    @GetMapping
+    @GetMapping("price")
     public List<Cart> getByPrice(@RequestParam float price) {
         return this.cartRepository.findByTotalPriceGreaterThan(price);
     }
