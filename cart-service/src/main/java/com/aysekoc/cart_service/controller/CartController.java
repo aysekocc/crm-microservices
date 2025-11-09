@@ -20,13 +20,13 @@ public class CartController {
         return this.cartRepository.findByCustomerFullName(name).orElseThrow();
     }
 
-    @GetMapping("price")
-    public List<Cart> getByPrice(@RequestParam float price) {
-        return this.cartRepository.findByTotalPriceGreaterThan(price);
+    @GetMapping("/price")
+    public List<Cart> getByPrice(@RequestParam float totalPrice) {
+        return this.cartRepository.findByTotalPriceGreaterThan(totalPrice);
     }
 
     @PostMapping
     public void add(@RequestBody Cart cart) {
-        this.cartRepository.save(cart);
+        this.cartRepository.insert(cart);
     }
 }

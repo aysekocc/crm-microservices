@@ -48,15 +48,32 @@ services:
     environment:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://pg-1:5432/order-service"
 
-  mongo:
-    image: mongo
+  mongodb:
+    image: mongo:4
+    hostname: mongo.myrepl
+    container_name: mongodb52
+    networks:
+      - cloud-network
+    command:
+      - --storageEngine
+      - wiredTiger
+      - --auth
+    environment:
+      - "MONGO_INITDB_ROOT_USERNAME=root"
+      - "MONGO_INITDB_ROOT_PASSWORD=root"
+      - MONGO_INITDB_DATABASE=admin
+    volumes:
+      - mongo-data:/data/db
+      - ./mongodb/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    restart: always
     ports:
       - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-
 
 volumes:
   pg1_data:
   pg2_data:
+  mongo-data:
+
+networks:
+  cloud-network:
+    driver: bridge
