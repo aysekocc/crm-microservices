@@ -1,3 +1,5 @@
+configurl: http://localhost:8079
+
 spring:
   application:
     name: "orderservice"
@@ -5,4 +7,4 @@ spring:
     config:
       profile: local
   config:
-    import: configserver:http://localhost:8079
+    import: configserver:${configurl}

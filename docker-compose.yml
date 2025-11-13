@@ -43,11 +43,12 @@ services:
       - KAFKA_CFG_NUM_PARTITIONS=2
   order-service:
     image: turkcell-order-service
+    container_name: order-service
     ports:
       - "8081:8081"
     environment:
-      SPRING_DATASOURCE_URL: "jdbc:postgresql://pg-1:5432/order-service"
-
+      SPRING_CLOUD_CONFIG_PROFILE: "dev"
+      CONFIGURL: "http://config-server:8079"
   config-server:
     image: turkcell-config-server
     container_name: config-server
