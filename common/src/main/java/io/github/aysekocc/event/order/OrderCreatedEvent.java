@@ -5,9 +5,7 @@ import java.time.LocalDate;
 public class OrderCreatedEvent {
     private String id;
     private LocalDate orderDate;
-
     public OrderCreatedEvent() {
-
     }
 
     public String getId() {
