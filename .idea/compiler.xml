@@ -21,8 +21,8 @@
         <module name="product-service" />
         <module name="cart-service" />
         <module name="order-service" />
-        <module name="identity-service" />
         <module name="customer-service" />
+        <module name="identity-service" />
         <module name="notification-service" />
       </profile>
     </annotationProcessing>
