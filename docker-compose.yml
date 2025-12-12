@@ -1,4 +1,8 @@
 services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
   pg-1:
     image: postgres:18
     container_name: "pg-1"
@@ -10,7 +14,6 @@ services:
       - POSTGRES_DB=postgres
     volumes:
       - pg1_data:/var/lib/postgresql/18/main
-
   pg-2:
     image: postgres:18
     container_name: "pg-2"
@@ -22,7 +25,6 @@ services:
       - POSTGRES_DB=postgres
     volumes:
       - pg2_data:/var/lib/postgresql/18/main
-
   zookeeper:
     image: confluentinc/cp-zookeeper:7.0.1
     container_name: zookeeper
@@ -33,7 +35,6 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "52181:2181"
-
   kafka:
     image: confluentinc/cp-kafka:7.0.1
     container_name: kafka
@@ -50,7 +51,6 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
       - local-kafka
-
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
     container_name: kafka-ui
@@ -66,7 +66,6 @@ services:
       - zookeeper
     networks:
       - local-kafka
-
   mongodb:
     image: mongo:4
     hostname: mongo.myrepl
@@ -87,7 +86,6 @@ services:
     restart: always
     ports:
       - "27017:27017"
-
 volumes:
   pg1_data:
   pg2_data:
