@@ -10,16 +10,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/messages")
 public class MessageController {
 
+    private final KafkaPublisherService kafkaPublisher;
 
-    private final KafkaPublisherService kafkaProducer;
-
-    public MessageController(KafkaPublisherService kafkaProducer) {
-        this.kafkaProducer = kafkaProducer;
+    public MessageController(KafkaPublisherService kafkaPublisher) {
+        this.kafkaPublisher = kafkaPublisher;
     }
 
     @PostMapping("/send")
-    public String sendMessage(@RequestParam String message) {
-        kafkaProducer.sendMessage(message);
+    public String sendMessage(@RequestParam String topic, String message) {
+        kafkaPublisher.sendMessage(topic, message);
         return "Mesaj gönderildi: " + message;
     }
 }
