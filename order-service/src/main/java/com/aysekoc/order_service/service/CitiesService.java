@@ -12,6 +12,7 @@ public class CitiesService {
 
     public CitiesService(CitiesRepository citiesRepository){
         this.citiesRepository = citiesRepository;
+        System.out.println("kdjfhf");
     }
 
     public List<Cities> getAllCities(){
